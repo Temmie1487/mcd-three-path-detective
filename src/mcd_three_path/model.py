@@ -44,6 +44,17 @@ def yuan(cents: Optional[int]) -> str:
 
 # --------------------------------------------------------------------- 渠道
 class Channel(str, Enum):
+    """三个取餐渠道。
+
+    线上真实 schema 用 ``orderType`` + ``beType`` 显式区分渠道（不是靠门店标签猜）：
+
+    * 到店自取：orderType=1, beType=1，**不传** beCode
+    * 得来速　：orderType=1, beType=5，**必传** beCode（来自 query-nearby-stores）
+    * 麦乐送　：orderType=2, beType=2，**必传** beCode（来自 delivery-query-stores）
+
+    同一家门店在不同渠道的 beCode 不同（实测 1420856 → 得来速 142085641 / 外送 142085602）。
+    """
+
     IN_STORE = "in_store"
     DELIVERY = "delivery"
     DRIVE_THRU = "drive_thru"
@@ -57,8 +68,20 @@ class Channel(str, Enum):
         }[self]
 
     @property
+    def order_type(self) -> int:
+        return 2 if self is Channel.DELIVERY else 1
+
+    @property
+    def be_type(self) -> int:
+        return {Channel.IN_STORE: 1, Channel.DELIVERY: 2, Channel.DRIVE_THRU: 5}[self]
+
+    @property
+    def needs_be_code(self) -> bool:
+        return self is not Channel.IN_STORE
+
+    @property
     def order_mode(self) -> str:
-        # 点餐场景码；服务端不认识时会在 compare 中自动降级并记录原因
+        """兼容旧写法（部分客户端文档用字符串场景码）。"""
         return {
             Channel.IN_STORE: "pickup",
             Channel.DELIVERY: "delivery",
@@ -145,11 +168,13 @@ def match_score(wanted: str, candidate: str) -> float:
 # --------------------------------------------------------------------- 门店/券
 @dataclass
 class Store:
-    store_id: str
+    store_code: str
     name: str
+    be_code: Optional[str] = None          # 渠道级业务编码，跨渠道不同
     raw: Dict[str, Any] = field(default_factory=dict)
-    drive_thru: bool = False
     distance_m: Optional[int] = None
+    open_hours: str = ""                   # 例 "07:00-23:00"
+    business_open: Optional[bool] = None
     tags: List[str] = field(default_factory=list)
 
     @property
@@ -164,17 +189,27 @@ class Coupon:
     coupon_code: Optional[str]
     name: str
     raw: Dict[str, Any] = field(default_factory=dict)
+    product_codes: List[str] = field(default_factory=list)  # 券自带商品白名单
+    scope_labels: List[str] = field(default_factory=list)   # 例 ["到店"] / ["外送"]
+    valid_until: str = ""
 
     @property
     def pair(self) -> Optional[Tuple[str, str]]:
-        """实测：算价挂券必须 couponId 与 couponCode 成对，缺一报 600010。"""
+        """实测：券挂在具体商品上，且 couponId 与 couponCode 必须成对，缺一即被拒。"""
         if self.coupon_id and self.coupon_code:
             return self.coupon_id, self.coupon_code
         return None
 
     @property
     def label(self) -> str:
-        return self.name or f"券{self.coupon_id or self.coupon_code or '?'}"
+        scope = f"[{'/'.join(self.scope_labels)}]" if self.scope_labels else ""
+        return f"{self.name or '券'}{scope}"
+
+    def fits(self, item: "CartItem") -> bool:
+        """券的 products 白名单里是否含该商品在本渠道的编码。"""
+        if not self.product_codes or item.code is None:
+            return True
+        return item.code in self.product_codes
 
 
 # --------------------------------------------------------------------- 结果
@@ -183,8 +218,10 @@ class ChannelQuote:
     channel: Channel
     store: Optional[Store] = None
     items: List[CartItem] = field(default_factory=list)
-    goods_cents: Optional[int] = None
-    fee_cents: Optional[int] = None
+    goods_cents: Optional[int] = None        # 优惠后商品价
+    original_cents: Optional[int] = None     # 优惠前合计
+    fee_cents: Optional[int] = None          # 配送费（实测外送 ¥6.00）
+    packing_cents: Optional[int] = None      # 打包服务费（实测外送 ¥1.90）
     discount_cents: Optional[int] = None
     total_cents: Optional[int] = None
     coupon: Optional[Coupon] = None
@@ -196,6 +233,11 @@ class ChannelQuote:
     @property
     def available(self) -> bool:
         return self.total_cents is not None and self.unavailable_reason is None
+
+    @property
+    def extra_cost_cents(self) -> int:
+        """渠道附加成本：配送费 + 打包服务费，这正是外送比到店贵的机制。"""
+        return (self.fee_cents or 0) + (self.packing_cents or 0)
 
     @property
     def badge(self) -> str:

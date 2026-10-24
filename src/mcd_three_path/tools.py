@@ -27,7 +27,13 @@ ALIASES: Dict[str, Tuple[str, ...]] = {
     "keyword": ("keyword", "address", "addressKeyword", "q", "name"),
     "latitude": ("latitude", "lat"),
     "longitude": ("longitude", "lng", "lon"),
-    "store_id": ("storeId", "storeCode", "shopId", "restaurantId", "code", "id"),
+    "store_id": ("storeCode", "storeId", "shopId"),
+    "store_code": ("storeCode", "storeId"),
+    "be_code": ("beCode",),
+    "be_type": ("beType",),
+    "order_type": ("orderType",),
+    "address_id": ("addressId",),
+    "product_code": ("productCode", "code"),
     "order_mode": ("orderMode", "diningMode", "takeType", "scene", "businessType", "channel"),
     "items": ("items", "goods", "cart", "productList", "foods", "skuList"),
     "coupon_id": ("couponId", "couponid"),
@@ -37,14 +43,15 @@ ALIASES: Dict[str, Tuple[str, ...]] = {
     "page_size": ("pageSize", "size", "limit"),
 }
 
+# 实测得到的「schema 里看不出来的」联动约束（服务端不报错但返回空结果）。
 REQUIRED_HINTS: Dict[str, List[str]] = {
-    # 实测：query-nearby-stores 的 city 与 keyword 必须同传，schema 上看不出这个联动约束
-    "query-nearby-stores": ["city", "keyword"],
-    "query-meals": ["store_id"],
-    "query-store-coupons": ["store_id"],
-    "query-meal-detail": ["store_id", "items"],
-    "calculate-price": ["store_id", "items"],
+    # 得来速/外送的 query-meals、query-store-coupons、calculate-price 缺 beCode 会静默返回空
+    "query-meals": ["be_code"],
+    "calculate-price": ["be_code"],
+    "query-store-coupons": ["be_code"],
 }
+# beCode 只在需要它的渠道才有意义，由调用方按 Channel.needs_be_code 决定是否传入，
+# 因此这里的 hint 只在参数里确实出现过 beCode 相关字段时才生效（见 bind 的跳过逻辑）。
 
 
 class SchemaMismatch(McpError):
@@ -111,7 +118,14 @@ class ToolCatalog:
 
         for hint_key in REQUIRED_HINTS.get(name, []):
             real = next((c for c in ALIASES.get(hint_key, (hint_key,)) if c in props), None)
-            if real and real not in aliased:
+            if not real:
+                continue
+            if hint_key == "be_code":
+                # 到店自取(beType=1)本来就不传 beCode；只有需要它的渠道才做校验
+                bt = semantic.get("beType") or semantic.get("be_type") or 1
+                if int(bt) == 1:
+                    continue
+            if real not in aliased:
                 raise SchemaMismatch(
                     f"`{name}` 需要同时提供 `{real}`（实测约束，缺一即返回空结果）。", code=None
                 )

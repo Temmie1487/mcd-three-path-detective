@@ -102,8 +102,7 @@ def cmd_compare(args: argparse.Namespace) -> int:
     if not args.items:
         raise SystemExit("请用 --items 描述要点的东西，例如 --items \"巨无霸 + 中薯条x2\"")
     catalog, cassette = _catalog(args)
-    engine = Comparator(catalog, money_unit=args.money_unit,
-                        max_coupon_probes=args.max_coupon_probes, verbose=args.verbose)
+    engine = Comparator(catalog, max_coupon_probes=args.max_coupon_probes, verbose=args.verbose)
     cmp = engine.compare(args.city, args.keyword, args.items,
                          channels=_channels(args.channels), force_store=args.store)
     if args.record:
@@ -171,7 +170,8 @@ def build_parser() -> argparse.ArgumentParser:
     sc.add_argument("--items", required=True, help="点单内容，如 \"巨无霸 + 2份中薯条\"")
     sc.add_argument("--channels", default="in,del,dt", help="要对比的渠道，默认三路全开")
     sc.add_argument("--store", help="只用指定门店（id 或名称片段）")
-    sc.add_argument("--money-unit", choices=["auto", "cents", "yuan"], default="auto")
+    sc.add_argument("--money-unit", choices=["auto", "cents", "yuan"], default="auto",
+                    help="一般不需要：菜单价按元、算价按分已在代码内固定口径")
     sc.add_argument("--max-coupon-probes", type=int, default=6, help="最多试挂几张券")
     sc.add_argument("--markdown", help="输出 Markdown 报告路径")
     sc.add_argument("--html", help="输出单页 HTML 报告路径")

@@ -29,12 +29,20 @@ def to_terminal(cmp: Comparison) -> str:
     if cmp.server_time:
         lines.append(f"服务端时间：{cmp.server_time}（{cmp.time_bucket}）")
     lines.append("")
-    lines.append(f"{'渠道':<8}{'到手价':>10}{'商品':>10}{'配送费':>8}{'优惠':>8}  口径 / 门店 / 备注")
+    lines.append(f"{'渠道':<8}{'到手价':>10}{'商品':>10}{'附加费':>10}{'优惠':>8}  口径 / 门店 / 备注")
     for q in cmp.quotes:
         if q.available:
+            extra = "—"
+            if q.fee_cents or q.packing_cents:
+                parts = []
+                if q.fee_cents:
+                    parts.append(f"配送{yuan(q.fee_cents)}")
+                if q.packing_cents:
+                    parts.append(f"打包{yuan(q.packing_cents)}")
+                extra = "+".join(parts)
             lines.append(
                 f"{q.channel.cn:<8}{yuan(q.total_cents):>10}{yuan(q.goods_cents):>10}"
-                f"{yuan(q.fee_cents):>8}{yuan(q.discount_cents):>8}  "
+                f"{extra:>10}{yuan(q.discount_cents):>8}  "
                 f"{q.badge}｜{q.store.name if q.store else '—'}"
                 + (f"｜{q.coupon.label}" if q.coupon else "")
             )
@@ -42,6 +50,8 @@ def to_terminal(cmp: Comparison) -> str:
             lines.append(f"{q.channel.cn:<8}{'—':>10}  不可用：{q.unavailable_reason}")
     lines.append("")
     lines.append(_delta_line(cmp))
+    if cmp.coupons_claimable:
+        lines.append(f"另有 {cmp.coupons_claimable} 张券可领未领（本工具只读，不会代你领券）。")
     for w in cmp.warnings:
         lines.append(f"⚠️  {w}")
     for q in cmp.quotes:
@@ -56,7 +66,7 @@ def to_markdown(cmp: Comparison) -> str:
         rows.append(
             f"| {q.channel.cn} | "
             + (f"{yuan(q.total_cents)}" if q.available else f"不可用（{q.unavailable_reason}）")
-            + f" | {yuan(q.goods_cents)} | {yuan(q.fee_cents)} | {yuan(q.discount_cents)} "
+            + f" | {yuan(q.goods_cents)} | {yuan(q.fee_cents)} | {yuan(q.packing_cents)} | {yuan(q.discount_cents)} "
             + f"| {q.badge} | {html.escape(q.store.name) if q.store else '—'} "
             + f"| {q.coupon.label if q.coupon else '—'} |"
         )
@@ -70,8 +80,8 @@ def to_markdown(cmp: Comparison) -> str:
         f"- **推荐取餐方式**：{best.channel.cn}（{best.store.name if best and best.store else '—'}）"
         + (f"，挂券「{best.coupon.label}」" if best and best.coupon else ""),
         "",
-        "| 渠道 | 到手价 | 商品金额 | 配送费 | 优惠 | 口径 | 门店 | 使用券 |",
-        "|---|---:|---:|---:|---:|---|---|---|",
+        "| 渠道 | 到手价 | 商品金额 | 配送费 | 打包服务费 | 优惠 | 口径 | 门店 | 使用券 |",
+        "|---|---:|---:|---:|---:|---:|---|---|---|",
         *rows,
     ]
     if cmp.warnings:
@@ -82,8 +92,8 @@ def to_markdown(cmp: Comparison) -> str:
                                       for i in un]]
     md += [
         "",
-        "> 口径说明：`官方实算` = 直接采用麦当劳 MCP `calculate-price` 返回值（金额单位为分）；",
-        "> `本地推算` = 官方算价失败时的单品累加基线，**不含配送费与优惠，仅供参照，不作为结论**。",
+        "> 口径说明：`官方实算` = 直接采用麦当劳 MCP `calculate-price` 返回值（金额单位为分，"
+        "含商品价、配送费、打包服务费与优惠）；算不通的渠道不给估算价。",
         f"> 本报告由参赛者独立开发的开源工具生成，非麦当劳官方产品；供应与价格以官方渠道实时结果为准。",
     ]
     return "\n".join(md)
@@ -103,7 +113,9 @@ def to_html(cmp: Comparison) -> str:
         cls = "best" if q is cmp.best else ""
         extra = []
         if q.fee_cents:
-            extra.append(f"含配送 {yuan(q.fee_cents)}")
+            extra.append(f"配送 {yuan(q.fee_cents)}")
+        if q.packing_cents:
+            extra.append(f"打包 {yuan(q.packing_cents)}")
         if q.discount_cents:
             extra.append(f"优惠 {yuan(q.discount_cents)}")
         bars += (f'<div class="row"><span class="ch">{_ORDER[q.channel]}</span>'
@@ -166,13 +178,20 @@ def to_json(cmp: Comparison) -> str:
             {
                 "channel": q.channel.value,
                 "store": q.store.name if q.store else None,
-                "store_id": q.store.store_id if q.store else None,
+                "store_code": q.store.store_code if q.store else None,
+                "be_code": q.store.be_code if q.store else None,
+                "open_hours": (q.store.open_hours or None) if q.store else None,
                 "total_yuan": None if q.total_cents is None else q.total_cents / 100,
                 "goods_yuan": None if q.goods_cents is None else q.goods_cents / 100,
                 "fee_yuan": None if q.fee_cents is None else q.fee_cents / 100,
+                "packing_yuan": None if q.packing_cents is None else q.packing_cents / 100,
+                "original_yuan": None if q.original_cents is None else q.original_cents / 100,
                 "discount_yuan": None if q.discount_cents is None else q.discount_cents / 100,
+                "order_type": q.channel.order_type,
+                "be_type": q.channel.be_type,
                 "source": q.source,
                 "coupon": q.coupon.label if q.coupon else None,
+                "extra_cost_yuan": q.extra_cost_cents / 100,
                 "unavailable_reason": q.unavailable_reason,
                 "notes": q.notes,
                 "items": [{"name": i.resolved_name or i.raw, "qty": i.qty, "code": i.code,

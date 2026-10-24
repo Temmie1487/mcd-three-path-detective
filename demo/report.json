@@ -1,129 +1,153 @@
 {
-  "item_text": "巨无霸 + 麦辣鸡翅2块 + 2份中薯条 + 可乐(中)",
-  "server_time": "2026-10-24T21:47:00+08:00",
+  "item_text": "巨无霸 + 麦辣鸡翅 + 2份薯条 + 可乐",
+  "server_time": "2026-10-24 21:47:00",
   "time_bucket": "夜宵 21:00-05:30",
   "warnings": [],
   "best": "in_store",
   "quotes": [
     {
       "channel": "in_store",
-      "store": "上海南京西路餐厅（演示）",
-      "store_id": "1990583",
-      "total_yuan": 61.5,
-      "goods_yuan": 75.5,
-      "fee_yuan": 0.0,
+      "store": "麦当劳演示东路餐厅（演示）",
+      "store_code": "1420001",
+      "be_code": null,
+      "open_hours": "00:00-23:59",
+      "total_yuan": 65.0,
+      "goods_yuan": 79.0,
+      "fee_yuan": null,
+      "packing_yuan": null,
+      "original_yuan": 79.0,
       "discount_yuan": 14.0,
+      "order_type": 1,
+      "be_type": 1,
       "source": "official",
-      "coupon": "13.5元中薯条买一送一",
+      "coupon": "薯条买一送一[到店]",
+      "extra_cost_yuan": 0.0,
       "unavailable_reason": null,
       "notes": [
-        "挂券最优：13.5元中薯条买一送一"
+        "金额口径校验：官方返回 price=6500 与 商品+配送+打包=7900 不一致",
+        "挂券最优：薯条买一送一[到店]"
       ],
       "items": [
         {
           "name": "巨无霸",
           "qty": 1,
-          "code": "BIGMAC",
-          "unit_price_yuan": 23.5
+          "code": "1100",
+          "unit_price_yuan": 26.5
         },
         {
-          "name": "麦辣鸡翅2块",
+          "name": "麦辣鸡翅",
           "qty": 1,
-          "code": "MCSPICYWING",
-          "unit_price_yuan": 14.5
+          "code": "1700",
+          "unit_price_yuan": 15.0
         },
         {
-          "name": "中薯条",
+          "name": "薯条",
           "qty": 2,
-          "code": "FRIES_M",
+          "code": "4810",
           "unit_price_yuan": 14.0
         },
         {
-          "name": "可乐(中)",
+          "name": "可乐",
           "qty": 1,
-          "code": "COLA_M",
+          "code": "9900008751",
           "unit_price_yuan": 9.5
         }
       ]
     },
     {
       "channel": "delivery",
-      "store": "麦乐送演示路配送站（演示）",
-      "store_id": "1990601",
-      "total_yuan": 74.5,
-      "goods_yuan": 75.5,
-      "fee_yuan": 9.0,
+      "store": "麦当劳演示东路餐厅（演示·外送）",
+      "store_code": "1420001",
+      "be_code": "142000102",
+      "open_hours": "09:00-22:00",
+      "total_yuan": 83.9,
+      "goods_yuan": 86.0,
+      "fee_yuan": 6.0,
+      "packing_yuan": 1.9,
+      "original_yuan": 93.9,
       "discount_yuan": 10.0,
+      "order_type": 2,
+      "be_type": 2,
       "source": "official",
-      "coupon": "麦乐送满49减10",
+      "coupon": "麦乐送满49减10[外送]",
+      "extra_cost_yuan": 7.9,
       "unavailable_reason": null,
       "notes": [
-        "挂券最优：麦乐送满49减10"
+        "1 张券的商品白名单不含本次点单在本渠道的编码，已跳过（跨渠道商品码不同，这正是同券不同命的原因）",
+        "金额口径校验：官方返回 price=8390 与 商品+配送+打包=9390 不一致",
+        "挂券最优：麦乐送满49减10[外送]"
       ],
       "items": [
         {
           "name": "巨无霸",
           "qty": 1,
-          "code": "BIGMAC",
-          "unit_price_yuan": 23.5
+          "code": "901100",
+          "unit_price_yuan": 29.0
         },
         {
           "name": "麦辣鸡翅2块",
           "qty": 1,
-          "code": "MCSPICYWING",
-          "unit_price_yuan": 14.5
+          "code": "901700",
+          "unit_price_yuan": 16.0
         },
         {
-          "name": "中薯条",
+          "name": "薯条",
           "qty": 2,
-          "code": "FRIES_M",
-          "unit_price_yuan": 14.0
+          "code": "501205",
+          "unit_price_yuan": 15.0
         },
         {
-          "name": "可乐(中)",
+          "name": "可口可乐",
           "qty": 1,
-          "code": "COLA_M",
-          "unit_price_yuan": 9.5
+          "code": "903050",
+          "unit_price_yuan": 11.0
         }
       ]
     },
     {
       "channel": "drive_thru",
-      "store": "上海南京西路餐厅（演示）",
-      "store_id": "1990583",
-      "total_yuan": 75.5,
-      "goods_yuan": 75.5,
-      "fee_yuan": 0.0,
+      "store": "麦当劳演示东路得来速餐厅（演示）",
+      "store_code": "1420001",
+      "be_code": "142000141",
+      "open_hours": "07:00-23:00",
+      "total_yuan": 79.0,
+      "goods_yuan": 79.0,
+      "fee_yuan": null,
+      "packing_yuan": null,
+      "original_yuan": 79.0,
       "discount_yuan": 0.0,
+      "order_type": 1,
+      "be_type": 5,
       "source": "official",
       "coupon": null,
+      "extra_cost_yuan": 0.0,
       "unavailable_reason": null,
       "notes": [
-        "已持有券在本渠道均不可用（示例原因：13.5元中薯条买一送一:该券在当前时段/门店/SKU 不可用(600012)）"
+        "已试挂券均不降价或不可用：「薯条买一送一」当前优惠券不可用(600012)；「麦乐送满49减10」当前优惠券不可用(600012)"
       ],
       "items": [
         {
           "name": "巨无霸",
           "qty": 1,
-          "code": "BIGMAC",
-          "unit_price_yuan": 23.5
+          "code": "1100",
+          "unit_price_yuan": 26.5
         },
         {
-          "name": "麦辣鸡翅2块",
+          "name": "麦辣鸡翅",
           "qty": 1,
-          "code": "MCSPICYWING",
-          "unit_price_yuan": 14.5
+          "code": "1700",
+          "unit_price_yuan": 15.0
         },
         {
-          "name": "中薯条",
+          "name": "薯条",
           "qty": 2,
-          "code": "FRIES_M",
+          "code": "4810",
           "unit_price_yuan": 14.0
         },
         {
-          "name": "可乐(中)",
+          "name": "可乐",
           "qty": 1,
-          "code": "COLA_M",
+          "code": "9900008751",
           "unit_price_yuan": 9.5
         }
       ]
@@ -139,6 +163,8 @@
     {
       "tool": "query-nearby-stores",
       "args": {
+        "beType": 1,
+        "searchType": 2,
         "city": "上海",
         "keyword": "南京西路"
       },
@@ -154,6 +180,17 @@
     {
       "tool": "delivery-query-stores",
       "args": {
+        "beType": 2,
+        "addressId": "DEMO-ADDRESS-0001"
+      },
+      "ok": true,
+      "note": ""
+    },
+    {
+      "tool": "query-nearby-stores",
+      "args": {
+        "beType": 5,
+        "searchType": 2,
         "city": "上海",
         "keyword": "南京西路"
       },
@@ -163,7 +200,37 @@
     {
       "tool": "query-meals",
       "args": {
-        "store_id": "1990583"
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 1
+      },
+      "ok": true,
+      "note": ""
+    },
+    {
+      "tool": "calculate-price",
+      "args": {
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 1,
+        "items": [
+          {
+            "productCode": "1100",
+            "quantity": 1
+          },
+          {
+            "productCode": "1700",
+            "quantity": 1
+          },
+          {
+            "productCode": "4810",
+            "quantity": 2
+          },
+          {
+            "productCode": "9900008751",
+            "quantity": 1
+          }
+        ]
       },
       "ok": true,
       "note": ""
@@ -177,7 +244,9 @@
     {
       "tool": "query-store-coupons",
       "args": {
-        "store_id": "1990583"
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 1
       },
       "ok": true,
       "note": ""
@@ -191,28 +260,27 @@
     {
       "tool": "calculate-price",
       "args": {
-        "store_id": "1990583",
-        "order_mode": "pickup",
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 1,
         "items": [
           {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
+            "productCode": "1100",
+            "quantity": 1
           },
           {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
+            "productCode": "1700",
+            "quantity": 1
           },
           {
-            "code": "FRIES_M",
+            "productCode": "4810",
             "quantity": 2,
-            "name": "中薯条"
+            "couponId": "DEMO-CID-0001",
+            "couponCode": "MCDDEMO0001"
           },
           {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
+            "productCode": "9900008751",
+            "quantity": 1
           }
         ]
       },
@@ -222,106 +290,99 @@
     {
       "tool": "calculate-price",
       "args": {
-        "store_id": "1990583",
-        "order_mode": "pickup",
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 1,
         "items": [
           {
-            "code": "BIGMAC",
+            "productCode": "1100",
             "quantity": 1,
-            "name": "巨无霸"
+            "couponId": "DEMO-CID-0002",
+            "couponCode": "MCDDEMO0002"
           },
           {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
+            "productCode": "1700",
+            "quantity": 1
           },
           {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
+            "productCode": "4810",
+            "quantity": 2
           },
           {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
+            "productCode": "9900008751",
+            "quantity": 1
           }
-        ],
-        "coupon_id": "C-DEMO-FRIES",
-        "coupon_code": "9900012387"
+        ]
+      },
+      "ok": false,
+      "note": "当前优惠券不可用(600012)"
+    },
+    {
+      "tool": "calculate-price",
+      "args": {
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 1,
+        "items": [
+          {
+            "productCode": "1100",
+            "quantity": 1,
+            "couponId": "DEMO-CID-0003",
+            "couponCode": "MCDDEMO0003"
+          },
+          {
+            "productCode": "1700",
+            "quantity": 1
+          },
+          {
+            "productCode": "4810",
+            "quantity": 2
+          },
+          {
+            "productCode": "9900008751",
+            "quantity": 1
+          }
+        ]
       },
       "ok": true,
       "note": ""
-    },
-    {
-      "tool": "calculate-price",
-      "args": {
-        "store_id": "1990583",
-        "order_mode": "pickup",
-        "items": [
-          {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
-          },
-          {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
-          },
-          {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
-          },
-          {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
-          }
-        ],
-        "coupon_id": "C-DEMO-DELIV",
-        "coupon_code": "9900012400"
-      },
-      "ok": false,
-      "note": "当前优惠券不可用(600012)"
-    },
-    {
-      "tool": "calculate-price",
-      "args": {
-        "store_id": "1990583",
-        "order_mode": "pickup",
-        "items": [
-          {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
-          },
-          {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
-          },
-          {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
-          },
-          {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
-          }
-        ],
-        "coupon_id": "C-DEMO-SUNDIE",
-        "coupon_code": "9900012411"
-      },
-      "ok": false,
-      "note": "当前优惠券不可用(600012)"
     },
     {
       "tool": "query-meals",
       "args": {
-        "store_id": "1990601"
+        "storeCode": "1420001",
+        "orderType": 2,
+        "beType": 2,
+        "beCode": "142000102"
+      },
+      "ok": true,
+      "note": ""
+    },
+    {
+      "tool": "calculate-price",
+      "args": {
+        "storeCode": "1420001",
+        "orderType": 2,
+        "beType": 2,
+        "items": [
+          {
+            "productCode": "901100",
+            "quantity": 1
+          },
+          {
+            "productCode": "901700",
+            "quantity": 1
+          },
+          {
+            "productCode": "501205",
+            "quantity": 2
+          },
+          {
+            "productCode": "903050",
+            "quantity": 1
+          }
+        ],
+        "beCode": "142000102"
       },
       "ok": true,
       "note": ""
@@ -335,7 +396,10 @@
     {
       "tool": "query-store-coupons",
       "args": {
-        "store_id": "1990601"
+        "storeCode": "1420001",
+        "orderType": 2,
+        "beType": 2,
+        "beCode": "142000102"
       },
       "ok": true,
       "note": ""
@@ -349,30 +413,41 @@
     {
       "tool": "calculate-price",
       "args": {
-        "store_id": "1990601",
-        "order_mode": "delivery",
+        "storeCode": "1420001",
+        "orderType": 2,
+        "beType": 2,
         "items": [
           {
-            "code": "BIGMAC",
+            "productCode": "901100",
             "quantity": 1,
-            "name": "巨无霸"
+            "couponId": "DEMO-CID-0002",
+            "couponCode": "MCDDEMO0002"
           },
           {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
+            "productCode": "901700",
+            "quantity": 1
           },
           {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
+            "productCode": "501205",
+            "quantity": 2
           },
           {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
+            "productCode": "903050",
+            "quantity": 1
           }
-        ]
+        ],
+        "beCode": "142000102"
+      },
+      "ok": true,
+      "note": ""
+    },
+    {
+      "tool": "query-meals",
+      "args": {
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 5,
+        "beCode": "142000141"
       },
       "ok": true,
       "note": ""
@@ -380,129 +455,82 @@
     {
       "tool": "calculate-price",
       "args": {
-        "store_id": "1990601",
-        "order_mode": "delivery",
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 5,
         "items": [
           {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
+            "productCode": "1100",
+            "quantity": 1
           },
           {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
+            "productCode": "1700",
+            "quantity": 1
           },
           {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
+            "productCode": "4810",
+            "quantity": 2
           },
           {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
+            "productCode": "9900008751",
+            "quantity": 1
           }
         ],
-        "coupon_id": "C-DEMO-FRIES",
-        "coupon_code": "9900012387"
+        "beCode": "142000141"
       },
-      "ok": false,
-      "note": "当前优惠券不可用(600012)"
+      "ok": true,
+      "note": ""
     },
     {
-      "tool": "calculate-price",
+      "tool": "query-my-coupons",
+      "args": {},
+      "ok": true,
+      "note": ""
+    },
+    {
+      "tool": "query-store-coupons",
       "args": {
-        "store_id": "1990601",
-        "order_mode": "delivery",
-        "items": [
-          {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
-          },
-          {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
-          },
-          {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
-          },
-          {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
-          }
-        ],
-        "coupon_id": "C-DEMO-DELIV",
-        "coupon_code": "9900012400"
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 5,
+        "beCode": "142000141"
       },
+      "ok": true,
+      "note": ""
+    },
+    {
+      "tool": "available-coupons",
+      "args": {},
       "ok": true,
       "note": ""
     },
     {
       "tool": "calculate-price",
       "args": {
-        "store_id": "1990583",
-        "order_mode": "driveThru",
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 5,
         "items": [
           {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
+            "productCode": "1100",
+            "quantity": 1
           },
           {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
+            "productCode": "1700",
+            "quantity": 1
           },
           {
-            "code": "FRIES_M",
+            "productCode": "4810",
             "quantity": 2,
-            "name": "中薯条"
+            "couponId": "DEMO-CID-0001",
+            "couponCode": "MCDDEMO0001"
           },
           {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
-          }
-        ]
-      },
-      "ok": true,
-      "note": ""
-    },
-    {
-      "tool": "calculate-price",
-      "args": {
-        "store_id": "1990583",
-        "order_mode": "driveThru",
-        "items": [
-          {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
-          },
-          {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
-          },
-          {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
-          },
-          {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
+            "productCode": "9900008751",
+            "quantity": 1
           }
         ],
-        "coupon_id": "C-DEMO-FRIES",
-        "coupon_code": "9900012387"
+        "beCode": "142000141"
       },
       "ok": false,
       "note": "当前优惠券不可用(600012)"
@@ -510,65 +538,30 @@
     {
       "tool": "calculate-price",
       "args": {
-        "store_id": "1990583",
-        "order_mode": "driveThru",
+        "storeCode": "1420001",
+        "orderType": 1,
+        "beType": 5,
         "items": [
           {
-            "code": "BIGMAC",
+            "productCode": "1100",
             "quantity": 1,
-            "name": "巨无霸"
+            "couponId": "DEMO-CID-0002",
+            "couponCode": "MCDDEMO0002"
           },
           {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
+            "productCode": "1700",
+            "quantity": 1
           },
           {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
+            "productCode": "4810",
+            "quantity": 2
           },
           {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
+            "productCode": "9900008751",
+            "quantity": 1
           }
         ],
-        "coupon_id": "C-DEMO-DELIV",
-        "coupon_code": "9900012400"
-      },
-      "ok": false,
-      "note": "当前优惠券不可用(600012)"
-    },
-    {
-      "tool": "calculate-price",
-      "args": {
-        "store_id": "1990583",
-        "order_mode": "driveThru",
-        "items": [
-          {
-            "code": "BIGMAC",
-            "quantity": 1,
-            "name": "巨无霸"
-          },
-          {
-            "code": "MCSPICYWING",
-            "quantity": 1,
-            "name": "麦辣鸡翅2块"
-          },
-          {
-            "code": "FRIES_M",
-            "quantity": 2,
-            "name": "中薯条"
-          },
-          {
-            "code": "COLA_M",
-            "quantity": 1,
-            "name": "可乐(中)"
-          }
-        ],
-        "coupon_id": "C-DEMO-SUNDIE",
-        "coupon_code": "9900012411"
+        "beCode": "142000141"
       },
       "ok": false,
       "note": "当前优惠券不可用(600012)"
