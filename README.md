@@ -5,6 +5,12 @@
 
 麦当劳程序员创意开发大赛（2026 1024 程序员节）参赛作品 · 参赛者独立开发，**非麦当劳官方产品**。
 
+[![CI](https://github.com/Temmie1487/mcd-three-path-detective/actions/workflows/ci.yml/badge.svg)](https://github.com/Temmie1487/mcd-three-path-detective/actions/workflows/ci.yml)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![零副作用](https://img.shields.io/badge/%E5%86%99%E6%93%8D%E4%BD%9C-%E6%97%A0%E9%A2%86%E5%88%B8%C2%B7%E4%B8%8D%E4%B8%8B%E5%8D%95-lightgrey)](MCP_INTEGRATION.md)
+
+
 ![报告预览](demo/report-preview.png)
 
 ---
