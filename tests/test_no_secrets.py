@@ -28,6 +28,13 @@ def _walk():
                 yield os.path.join(dirpath, fn)
 
 
+def _looks_random(snippet: str) -> bool:
+    """随机凭证的特征：数字密度高、字母多。避免把 goodsAmount/deliveryFee 这类字段名误判成凭证。"""
+    digits = sum(c.isdigit() for c in snippet)
+    letters = sum(c.isalpha() for c in snippet)
+    return digits >= 5 and letters >= 20
+
+
 def test_no_real_credentials_in_repo():
     hits = []
     for path in _walk():
@@ -45,6 +52,8 @@ def test_no_real_credentials_in_repo():
                     continue
                 if rel.endswith("demo-cassette.json") and why != "疑似麦当劳 MCP Token":
                     continue  # 录制文件里的长 base64 只可能是业务字段，逐个校验见下
+                if why == "疑似长 base64 凭证" and not _looks_random(snippet):
+                    continue
                 hits.append(f"{rel}: {why} -> {snippet[:24]}…")
     assert not hits, "仓库中发现疑似真实凭证：\n" + "\n".join(hits)
 

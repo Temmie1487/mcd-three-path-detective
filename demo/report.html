@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>麦麦三路比价报告</title>
+<style>
+:root{--m:#DA291C;--ink:#1a1a1a;--mut:#6b6b6b;--bg:#fff8f2}
+*{box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;padding:28px;
+background:var(--bg);color:var(--ink)}
+h1{margin:0 0 4px;font-size:22px}
+.sub{color:var(--mut);font-size:13px;margin-bottom:18px}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px}
+.verdict{font-size:19px;font-weight:700;color:var(--m)}
+.row{display:flex;align-items:center;gap:12px;margin:10px 0}
+.ch{width:74px;font-size:14px;font-weight:600}
+.track{flex:1;height:22px;background:#f2ece6;border-radius:11px;overflow:hidden}
+.bar{height:100%;background:#c9a227;border-radius:11px}
+.bar.best{background:var(--m)}
+.bar.dead{background:#ddd;width:8%!}
+.val{width:230px;font-variant-numeric:tabular-nums;font-size:14px;text-align:right}
+.val em{display:block;font-style:normal;color:var(--mut);font-size:12px}
+.dead .val{color:var(--mut);text-align:left;width:auto;font-size:12px}
+ul{margin:6px 0;padding-left:18px;font-size:13px;color:var(--mut)}
+footer{font-size:12px;color:var(--mut);line-height:1.7}
+code{background:#f6f1ea;padding:1px 5px;border-radius:4px}
+</style></head><body>
+<h1>麦麦三路比价报告</h1>
+<div class="sub">2026-10-24 22:35 · 服务端时间 2026-10-24T21:47:00+08:00（夜宵 21:00-05:30）</div>
+<div class="card"><div class="verdict">最优路径 到店自取 ¥61.50，比最贵的 得来速 ¥75.50 省 ¥14.00（18.5% off）。</div>
+<div style="margin-top:8px;font-size:14px;color:var(--mut)">点单：巨无霸⚠️、麦辣鸡翅2块⚠️、2份中薯条⚠️、可乐(中)⚠️</div>
+<div class="row"><span class="ch">到店自取</span><div class="track"><div class="bar best" style="width:81.5%"></div></div><span class="val">¥61.50 <em>官方实算 · 优惠 ¥14.00</em></span></div><div class="row"><span class="ch">麦乐送</span><div class="track"><div class="bar " style="width:98.7%"></div></div><span class="val">¥74.50 <em>官方实算 · 含配送 ¥9.00 / 优惠 ¥10.00</em></span></div><div class="row"><span class="ch">得来速</span><div class="track"><div class="bar " style="width:100.0%"></div></div><span class="val">¥75.50 <em>官方实算</em></span></div></div>
+<div class="card"><b style="font-size:14px">口径与提醒</b><ul><li>到店自取：挂券最优：13.5元中薯条买一送一</li><li>麦乐送：挂券最优：麦乐送满49减10</li><li>得来速：已持有券在本渠道均不可用（示例原因：13.5元中薯条买一送一:该券在当前时段/门店/SKU 不可用(600012)）</li></ul>
+<div class="row"><span class="ch">明细</span></div>
+<pre style="font-size:12px;overflow:auto"># 麦麦三路比价报告 · 2026-10-24 22:35
+
+- **点单**：巨无霸 + 麦辣鸡翅2块 + 2份中薯条 + 可乐(中)
+- **服务端时间**：2026-10-24T21:47:00+08:00（夜宵 21:00-05:30）
+- **结论**：最优路径 **到店自取** ¥61.50，比最贵的 得来速 ¥75.50 **省 ¥14.00（18.5% off）**。
+- **推荐取餐方式**：到店自取（上海南京西路餐厅（演示）），挂券「13.5元中薯条买一送一」
+
+| 渠道 | 到手价 | 商品金额 | 配送费 | 优惠 | 口径 | 门店 | 使用券 |
+|---|---:|---:|---:|---:|---|---|---|
+| 到店自取 | ¥61.50 | ¥75.50 | ¥0.00 | ¥14.00 | 官方实算 | 上海南京西路餐厅（演示） | 13.5元中薯条买一送一 |
+| 麦乐送 | ¥74.50 | ¥75.50 | ¥9.00 | ¥10.00 | 官方实算 | 麦乐送演示路配送站（演示） | 麦乐送满49减10 |
+| 得来速 | ¥75.50 | ¥75.50 | ¥0.00 | ¥0.00 | 官方实算 | 上海南京西路餐厅（演示） | — |
+
+## 未匹配商品
+- 巨无霸（在门店菜单里没找到足够接近的餐品，已按诚实降级处理）
+- 麦辣鸡翅2块（在门店菜单里没找到足够接近的餐品，已按诚实降级处理）
+- 2份中薯条（在门店菜单里没找到足够接近的餐品，已按诚实降级处理）
+- 可乐(中)（在门店菜单里没找到足够接近的餐品，已按诚实降级处理）
+
+&gt; 口径说明：`官方实算` = 直接采用麦当劳 MCP `calculate-price` 返回值（金额单位为分）；
+&gt; `本地推算` = 官方算价失败时的单品累加基线，**不含配送费与优惠，仅供参照，不作为结论**。
+&gt; 本报告由参赛者独立开发的开源工具生成，非麦当劳官方产品；供应与价格以官方渠道实时结果为准。</pre></div>
+<footer>金额单位分→元换算；<code>官方实算</code> 取自麦当劳 MCP <code>calculate-price</code>，
+<code>本地推算</code> 不含配送费与优惠，仅供参照。本工具为大赛参赛作品，由参赛者独立开发，
+非麦当劳官方产品；输出仅供参考，餐品供应与价格以麦当劳官方渠道实时结果为准。</footer>
+</body></html>

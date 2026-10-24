@@ -15,6 +15,6 @@ token.txt
 my-cassette.json
 local-cassette.json
 *.private.json
-report.html
-report.md
-report.json
+/report.html
+/report.md
+/report.json
