@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "mcd-mcp": {
+      "type": "streamablehttp",
+      "url": "${MCD_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${MCD_MCP_TOKEN}"
+      }
+    }
+  },
+  "_note": "脱敏配置示例：只允许环境变量占位符。请把 MCD_MCP_URL 设为 https://mcp.mcd.cn，MCD_MCP_TOKEN 设为你在 https://open.mcd.cn/mcp 控制台激活得到的 Token。严禁把真实 Token 写进本文件或提交到仓库。"
+}

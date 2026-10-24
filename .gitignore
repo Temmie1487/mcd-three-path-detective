@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+# 真实凭证与本地录制绝不入库
+.env
+.env.*
+*mcp-token*
+token.txt
+my-cassette.json
+local-cassette.json
+*.private.json
+report.html
+report.md
+report.json

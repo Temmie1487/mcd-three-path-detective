@@ -1,0 +1,30 @@
+name: CI（离线，无需 MCP Token）
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: 单元测试（全部走 fixtures/demo-cassette.json）
+        run: pytest
+      - name: 离线演示跑通三路比价
+        run: |
+          python -m mcd_three_path --replay fixtures/demo-cassette.json compare \
+            --city 上海 --keyword 南京西路 \
+            --items "巨无霸 + 麦辣鸡翅2块 + 2份中薯条 + 可乐(中)" \
+            --markdown demo/report.md --html demo/report.html --json demo/report.json
+      - name: 敏感信息扫描（禁止真实 Token 入库）
+        run: pytest tests/test_no_secrets.py -q
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo-report
+          path: demo/
