@@ -14,14 +14,17 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -r requirements.txt
+      - name: 安装本项目（可编辑，命令行 mcd-three-path 直接可用）
+        run: pip install -e .
       - name: 单元测试（全部走 fixtures/demo-cassette.json）
         run: pytest
       - name: 离线演示跑通三路比价
         run: |
           python -m mcd_three_path --replay fixtures/demo-cassette.json compare \
             --city 上海 --keyword 南京西路 \
-            --items "巨无霸 + 麦辣鸡翅2块 + 2份中薯条 + 可乐(中)" \
+            --items "巨无霸 + 麦辣鸡翅 + 2份薯条 + 可乐" \
             --markdown demo/report.md --html demo/report.html --json demo/report.json
+          test -s demo/report.html && test -s demo/report.md
       - name: 敏感信息扫描（禁止真实 Token 入库）
         run: pytest tests/test_no_secrets.py -q
       - uses: actions/upload-artifact@v4
